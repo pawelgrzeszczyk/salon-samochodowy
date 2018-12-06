@@ -1,22 +1,42 @@
-package com.grzeszczyk;
+package com.grzeszczyk.model;
 
+import org.hibernate.annotations.Immutable;
+
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import static javax.persistence.EnumType.STRING;
+
+@Entity
+@Immutable
 public class Car {
+
+    @Id
+    @GeneratedValue
     private Integer id;
     private String name;
+    @Enumerated(STRING)
+    private TypeOfCar typeOfCar;
     private boolean isAvailable;
     private Double engineCapacity;
     private Integer enginePower;
+    @Enumerated(STRING)
     private FuelType fuelType;
     private Integer numberOfDoors;
     private Integer numberOfSeats;
     private Integer yearOfProduction;
     private String color;
-    private String gearbox;
+    @Enumerated(STRING)
+    private Gearbox gearbox;
     private Integer numberVIN;
 
-    public Car(Integer id, String name, Double engineCapacity, Integer enginePower, FuelType fuelType, Integer numberOfDoors, Integer numberOfSeats, Integer yearOfProduction, String color, String gearbox, Integer numberVIN) {
-        this.id = id;
+
+    public Car(String name, TypeOfCar typeOfCar, boolean isAvailable, Double engineCapacity, Integer enginePower, FuelType fuelType, Integer numberOfDoors, Integer numberOfSeats, Integer yearOfProduction, String color, Gearbox gearbox, Integer numberVIN) {
         this.name = name;
+        this.typeOfCar = typeOfCar;
+        this.isAvailable = isAvailable;
         this.engineCapacity = engineCapacity;
         this.enginePower = enginePower;
         this.fuelType = fuelType;
@@ -39,22 +59,6 @@ public class Car {
         this.id = id;
     }
 
-    public Double getEngineCapacity() {
-        return engineCapacity;
-    }
-
-    public void setEngineCapacity(Double engineCapacity) {
-        this.engineCapacity = engineCapacity;
-    }
-
-    public FuelType getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
-    }
-
     public String getName() {
         return name;
     }
@@ -63,12 +67,44 @@ public class Car {
         this.name = name;
     }
 
+    public TypeOfCar getTypeOfCar() {
+        return typeOfCar;
+    }
+
+    public void setTypeOfCar(TypeOfCar typeOfCar) {
+        this.typeOfCar = typeOfCar;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+    public Double getEngineCapacity() {
+        return engineCapacity;
+    }
+
+    public void setEngineCapacity(Double engineCapacity) {
+        this.engineCapacity = engineCapacity;
+    }
+
     public Integer getEnginePower() {
         return enginePower;
     }
 
     public void setEnginePower(Integer enginePower) {
         this.enginePower = enginePower;
+    }
+
+    public FuelType getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(FuelType fuelType) {
+        this.fuelType = fuelType;
     }
 
     public Integer getNumberOfDoors() {
@@ -103,11 +139,11 @@ public class Car {
         this.color = color;
     }
 
-    public String getGearbox() {
+    public Gearbox getGearbox() {
         return gearbox;
     }
 
-    public void setGearbox(String gearbox) {
+    public void setGearbox(Gearbox gearbox) {
         this.gearbox = gearbox;
     }
 
@@ -124,6 +160,8 @@ public class Car {
         return "Car{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", typeOfCar=" + typeOfCar +
+                ", isAvailable=" + isAvailable +
                 ", engineCapacity=" + engineCapacity +
                 ", enginePower=" + enginePower +
                 ", fuelType=" + fuelType +
@@ -131,7 +169,7 @@ public class Car {
                 ", numberOfSeats=" + numberOfSeats +
                 ", yearOfProduction=" + yearOfProduction +
                 ", color='" + color + '\'' +
-                ", gearbox='" + gearbox + '\'' +
+                ", gearbox=" + gearbox +
                 ", numberVIN=" + numberVIN +
                 '}';
     }
