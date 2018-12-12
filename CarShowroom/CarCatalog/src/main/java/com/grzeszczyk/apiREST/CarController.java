@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.grzeszczyk.model.FuelType.BENZINE;
+import static com.grzeszczyk.model.Gearbox.MANUAL;
+import static com.grzeszczyk.model.TypeOfCar.COUPE;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -18,6 +21,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class CarController {
 
     private static final Logger log = LoggerFactory.getLogger(CarController.class);
+
 
     private final CarService carService;
 
@@ -66,5 +70,24 @@ public class CarController {
         log.info("Updated Car {}", updatedCar);
 
         return updatedCar;
+    }
+
+    @GetMapping("/fill")
+    public String fillData(){
+        Car bmw = new Car();
+        bmw.setName("BMW E36");
+        bmw.setNumberOfDoors(2);
+        bmw.setColor("red");
+        bmw.setEngineCapacity(2.8);
+        bmw.setEnginePower(200);
+        bmw.setFuelType(BENZINE);
+        bmw.setGearbox(MANUAL);
+        bmw.setNumberVIN(789456123);
+        bmw.setNumberOfSeats(5);
+        bmw.setYearOfProduction(2018);
+        bmw.setTypeOfCar(COUPE);
+        bmw.setAvailable(true);
+        carService.save(bmw);
+        return "Created some users.";
     }
 }

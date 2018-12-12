@@ -115,5 +115,6 @@
     <module>server</module>
     <module>common</module>
     <module>CarCatalog</module>
+    <module>client</module>
   </modules>
 </project>
