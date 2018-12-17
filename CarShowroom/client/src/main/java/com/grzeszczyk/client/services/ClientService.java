@@ -1,7 +1,7 @@
 package com.grzeszczyk.client.services;
 
 import com.google.common.collect.Lists;
-import com.grzeszczyk.client.entity.Client;
+import com.grzeszczyk.Client;
 import com.grzeszczyk.client.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +39,7 @@ public class ClientService {
     }
 
     public Client update(Client client) {
-        Client updatedClient = clientRepository.save(client);
+        Client updatedClient = clientRepository.saveAndFlush(client);
         return updatedClient;
     }
 

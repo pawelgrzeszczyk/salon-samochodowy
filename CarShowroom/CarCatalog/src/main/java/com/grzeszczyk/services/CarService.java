@@ -2,7 +2,7 @@ package com.grzeszczyk.services;
 
 
 import com.google.common.collect.Lists;
-import com.grzeszczyk.model.Car;
+import com.grzeszczyk.Car;
 import com.grzeszczyk.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

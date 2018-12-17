@@ -1,6 +1,6 @@
 package com.grzeszczyk.apiREST;
 
-import com.grzeszczyk.model.Car;
+import com.grzeszczyk.Car;
 import com.grzeszczyk.services.CarService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.grzeszczyk.model.FuelType.BENZINE;
-import static com.grzeszczyk.model.Gearbox.MANUAL;
-import static com.grzeszczyk.model.TypeOfCar.COUPE;
+import static com.grzeszczyk.FuelType.BENZINE;
+import static com.grzeszczyk.Gearbox.MANUAL;
+import static com.grzeszczyk.TypeOfCar.COUPE;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -75,9 +75,9 @@ public class CarController {
     @GetMapping("/fill")
     public String fillData(){
         Car bmw = new Car();
-        bmw.setName("BMW E36");
+        bmw.setName("BMW E46");
         bmw.setNumberOfDoors(2);
-        bmw.setColor("red");
+        bmw.setColor("black");
         bmw.setEngineCapacity(2.8);
         bmw.setEnginePower(200);
         bmw.setFuelType(BENZINE);

@@ -1,58 +1,47 @@
 package com.grzeszczyk;
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
+import static javax.persistence.EnumType.STRING;
+import static javax.persistence.GenerationType.AUTO;
+
+@Entity
 public class Car {
-    private Integer id;
+
+    @Id
+    @GeneratedValue(strategy = AUTO)
+    private Long id;
     private String name;
+    @Enumerated(STRING)
+    private TypeOfCar typeOfCar;
     private boolean isAvailable;
     private Double engineCapacity;
     private Integer enginePower;
+    @Enumerated(STRING)
     private FuelType fuelType;
     private Integer numberOfDoors;
     private Integer numberOfSeats;
     private Integer yearOfProduction;
     private String color;
-    private String gearbox;
+    @Enumerated(STRING)
+    private Gearbox gearbox;
     private Integer numberVIN;
 
-    public Car(Integer id, String name, Double engineCapacity, Integer enginePower, FuelType fuelType, Integer numberOfDoors, Integer numberOfSeats, Integer yearOfProduction, String color, String gearbox, Integer numberVIN) {
-        this.id = id;
-        this.name = name;
-        this.engineCapacity = engineCapacity;
-        this.enginePower = enginePower;
-        this.fuelType = fuelType;
-        this.numberOfDoors = numberOfDoors;
-        this.numberOfSeats = numberOfSeats;
-        this.yearOfProduction = yearOfProduction;
-        this.color = color;
-        this.gearbox = gearbox;
-        this.numberVIN = numberVIN;
-    }
 
-    public Car() {
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Client client;
 
-    public Integer getId() {
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public Double getEngineCapacity() {
-        return engineCapacity;
-    }
-
-    public void setEngineCapacity(Double engineCapacity) {
-        this.engineCapacity = engineCapacity;
-    }
-
-    public FuelType getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(FuelType fuelType) {
-        this.fuelType = fuelType;
     }
 
     public String getName() {
@@ -63,12 +52,44 @@ public class Car {
         this.name = name;
     }
 
+    public TypeOfCar getTypeOfCar() {
+        return typeOfCar;
+    }
+
+    public void setTypeOfCar(TypeOfCar typeOfCar) {
+        this.typeOfCar = typeOfCar;
+    }
+
+    public boolean isAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(boolean available) {
+        isAvailable = available;
+    }
+
+    public Double getEngineCapacity() {
+        return engineCapacity;
+    }
+
+    public void setEngineCapacity(Double engineCapacity) {
+        this.engineCapacity = engineCapacity;
+    }
+
     public Integer getEnginePower() {
         return enginePower;
     }
 
     public void setEnginePower(Integer enginePower) {
         this.enginePower = enginePower;
+    }
+
+    public FuelType getFuelType() {
+        return fuelType;
+    }
+
+    public void setFuelType(FuelType fuelType) {
+        this.fuelType = fuelType;
     }
 
     public Integer getNumberOfDoors() {
@@ -103,11 +124,11 @@ public class Car {
         this.color = color;
     }
 
-    public String getGearbox() {
+    public Gearbox getGearbox() {
         return gearbox;
     }
 
-    public void setGearbox(String gearbox) {
+    public void setGearbox(Gearbox gearbox) {
         this.gearbox = gearbox;
     }
 
@@ -119,11 +140,19 @@ public class Car {
         this.numberVIN = numberVIN;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "  name='" + name + '\'' +
+                ", typeOfCar=" + typeOfCar +
                 ", engineCapacity=" + engineCapacity +
                 ", enginePower=" + enginePower +
                 ", fuelType=" + fuelType +
@@ -131,7 +160,7 @@ public class Car {
                 ", numberOfSeats=" + numberOfSeats +
                 ", yearOfProduction=" + yearOfProduction +
                 ", color='" + color + '\'' +
-                ", gearbox='" + gearbox + '\'' +
+                ", gearbox=" + gearbox +
                 ", numberVIN=" + numberVIN +
                 '}';
     }
