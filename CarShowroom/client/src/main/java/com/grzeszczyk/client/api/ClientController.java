@@ -68,20 +68,15 @@ public class ClientController {
     }
 
     @GetMapping("/{id}/buy/{id_car}")
-    public String requestDealer(@PathVariable Long id,@PathVariable Long id_car){
+    public String requestClient(@PathVariable Long id,@PathVariable Long id_car){
 
         Client requestingClient = clientService.find(id);
         Car car = carService.find(id_car);
 
         if(null != requestingClient){
-            //dealer.setClient(requestingClient);
-            //dealer.setCar(car);
-            //dealer.setQuantity(15000);
-
             if(car.isAvailable() == true){
                 List<Car> carList = requestingClient.getCarsList();
                 carList.add(car);
-                //dealer.setDealerCarList(carList);
                 requestingClient.setCarsList(carList);
                 car.setClient(requestingClient);
                 clientService.update(requestingClient);
@@ -91,14 +86,25 @@ public class ClientController {
                 return "Congratulations! You bought a car: "+car.toString() ;
             }
             else {
+                log.info("This car is not available!");
                 return "This car is not available!";
             }
         }
         else {
+
             log.info("Bad request. Client not found.");
             return "Bad request. Client not found.";
         }
     }
+
+   /* @GetMapping("{id}/bill/{id_dealer}")
+    public void requestDealer(@PathVariable Long id,@PathVariable Long id_dealer){
+        Client client = clientService.find(id);
+        Dealer dealer = dealerController.find(id_dealer);
+
+        dealerController.requestDealer(dealer.getId(),client.getId());
+
+    }*/
 
     @GetMapping("/fill")
     public String fillData(){
@@ -108,6 +114,6 @@ public class ClientController {
         paul.setAge(26);
         paul.setEmailAdress("paul@paul.com");
         clientService.save(paul);
-        return "Created some users.";
+        return "Created some users...";
     }
 }

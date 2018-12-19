@@ -1,9 +1,9 @@
 package com.grzeszczyk;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.google.common.collect.Lists;
-import org.hibernate.annotations.Immutable;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,14 +32,12 @@ public class Client {
     @JsonManagedReference
     private List<Car> carsList = Lists.newArrayList();
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dealer_id")
+    @JsonManagedReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Dealer dealer;
 
-
-    public Client(String firstName, String lastName, int age, String emailAdress) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.emailAdress = emailAdress;
-    }
 
     public Client(){
 
@@ -93,6 +91,13 @@ public class Client {
         this.carsList = carsList;
     }
 
+    public Dealer getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
+    }
 
     @Override
     public String toString() {

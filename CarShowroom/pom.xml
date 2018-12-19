@@ -108,8 +108,9 @@
 
 
   <modules>
-    <module>common</module>
-    <module>CarCatalog</module>
-    <module>client</module>
+	  <module>common</module>
+	  <module>CarCatalog</module>
+	  <module>client</module>
+	  <module>dealer</module>
   </modules>
 </project>

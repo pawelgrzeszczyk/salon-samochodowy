@@ -14,6 +14,7 @@ public class Car {
     @GeneratedValue(strategy = AUTO)
     private Long id;
     private String name;
+    private Integer price;
     @Enumerated(STRING)
     private TypeOfCar typeOfCar;
     private boolean isAvailable;
@@ -35,6 +36,9 @@ public class Car {
     private Client client;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Dealer dealer;
+
 
     public Long getId() {
         return id;
@@ -50,6 +54,14 @@ public class Car {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public TypeOfCar getTypeOfCar() {
@@ -148,11 +160,20 @@ public class Car {
         this.client = client;
     }
 
+    public Dealer getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "  name='" + name + '\'' +
                 ", typeOfCar=" + typeOfCar +
+                ", price=" + price+
                 ", engineCapacity=" + engineCapacity +
                 ", enginePower=" + enginePower +
                 ", fuelType=" + fuelType +

@@ -1,4 +1,4 @@
-package com.grzeszczyk.apiREST;
+package com.grzeszczyk.api;
 
 import com.grzeszczyk.Car;
 import com.grzeszczyk.services.CarService;
@@ -22,7 +22,7 @@ public class CarController {
 
     private static final Logger log = LoggerFactory.getLogger(CarController.class);
 
-
+    @Autowired
     private final CarService carService;
 
     @Autowired
@@ -33,9 +33,7 @@ public class CarController {
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     public Car save(@RequestBody Car car) {
         Car savedCar = carService.save(car);
-
         log.info("Add car {}", savedCar);
-
         return savedCar;
     }
 
@@ -46,29 +44,23 @@ public class CarController {
 
     @RequestMapping("/all_car")
     @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public List<Car> getUsers() {
+    public List<Car> getCars() {
         List<Car> cars = carService.findAll();
-
         log.info("Retrieve objects {}", cars);
-
         return cars;
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteCar(@PathVariable Long id) {
         carService.deleteCar(id);
-
         log.info("Delete car with id {}", id);
-
         return new ResponseEntity(NO_CONTENT);
     }
 
     @PutMapping(consumes = APPLICATION_JSON_VALUE)
     public Car update(@RequestBody Car car) {
         Car updatedCar = carService.update(car);
-
         log.info("Updated Car {}", updatedCar);
-
         return updatedCar;
     }
 
@@ -76,6 +68,7 @@ public class CarController {
     public String fillData(){
         Car bmw = new Car();
         bmw.setName("BMW E46");
+        bmw.setPrice(10000);
         bmw.setNumberOfDoors(2);
         bmw.setColor("black");
         bmw.setEngineCapacity(2.8);
@@ -88,6 +81,6 @@ public class CarController {
         bmw.setTypeOfCar(COUPE);
         bmw.setAvailable(true);
         carService.save(bmw);
-        return "Created some users.";
+        return "Created some car...";
     }
 }

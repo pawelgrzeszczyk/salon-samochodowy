@@ -1,10 +1,11 @@
 package com.grzeszczyk;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.google.common.collect.Lists;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static javax.persistence.GenerationType.AUTO;
@@ -16,8 +17,20 @@ public class Dealer {
     @GeneratedValue(strategy = AUTO)
     private Long id;
     private String name;
-    private Date purchaseOfDate;
+    private LocalDate purchaseOfDate;
     private Integer quantity;
+
+    @OneToMany(
+            mappedBy = "dealer",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL
+    )
+    private List<Car> carsClientList = Lists.newArrayList();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id")
+    @JsonBackReference
+    private Client client;
 
 
 
@@ -33,11 +46,11 @@ public class Dealer {
         this.id = id;
     }
 
-    public Date getPurchaseOfDate() {
+    public LocalDate getPurchaseOfDate() {
         return purchaseOfDate;
     }
 
-    public void setPurchaseOfDate(Date purchaseOfDate) {
+    public void setPurchaseOfDate(LocalDate purchaseOfDate) {
         this.purchaseOfDate = purchaseOfDate;
     }
 
@@ -57,4 +70,31 @@ public class Dealer {
         this.name = name;
     }
 
+    public List<Car> getCarsClientList() {
+        return carsClientList;
+    }
+
+    public void setCarsClientList(List<Car> carsClientList) {
+        this.carsClientList = carsClientList;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    @Override
+    public String toString() {
+        return "Dealer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", purchaseOfDate=" + purchaseOfDate +
+                ", quantity=" + quantity +
+                ", carsClientList=" + carsClientList +
+                ", client=" + client +
+                '}';
+    }
 }
