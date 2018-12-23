@@ -112,7 +112,7 @@ public class ClientController {
         paul.setFirstName("Pawel");
         paul.setLastName("Grzeszczyk");
         paul.setAge(26);
-        paul.setEmailAdress("paul@paul.com");
+        paul.setEmailAdress("pawel@gmail.com");
         clientService.save(paul);
         return "Created some users...";
     }

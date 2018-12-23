@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import java.time.LocalDate;
-
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.grzeszczyk", "com.grzeszczyk.dealer.repositories", "com.grzeszczyk.dealer.services"})
